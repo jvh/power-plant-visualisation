@@ -4,7 +4,7 @@ Given some data regarding power plants, clean the data to a useable format, and 
 
 ## Instructions
 
-1. Start a server using a command such as python -m http.server 3000.
+1. Start a server using a command such as `python -m http.server 3000`.
 2. Open *index.html* in a web browser.
 
 ## Data Cleaning
