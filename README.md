@@ -30,4 +30,4 @@ For this piece of work I used some open source data regarding power plants, and 
 1. Visualisation base tool used: [D3](https://d3js.org/)
 2. Map visualisation base: [D3 Map](https://vida.io/gists/KuoWAKajdT7Q5q3Lt). 
 3. Further resources...
-   1. https://codepen.io/jamesthomson/pen/wMzQYG?editors=1010
+   1. [Zoom and panning functionality](https://codepen.io/jamesthomson/pen/wMzQYG?editors=1010)
