@@ -462,7 +462,7 @@
                                           "label1":"label 1", 
                                           "color0":"#99ccff", 
                                           "color1":"#0050A1",
-                                          "width":960,"height":960}
+                                          "width":1200,"height":960}
 
                             var width = config.width,
                                 height = config.height;
@@ -710,6 +710,77 @@
                                 .attr("r", 1)
                                 .style("fill", "red")
                                 .style("opacity", 0.8)
+                                .on("mousemove", function(d) {
+                                    var html = "";
+
+                                    html += "<div class=\"tooltip_kv\">";
+                                    html += "<span class=\"tooltip_key\">";
+                                    if(d.name !== "") {
+                                        html += d.name + "<br>";
+                                    }
+                                    if(d.commissioning_year !== "" ) {
+                                     html += "Buiild In: " + d.commissioning_year + "<br>";
+                                    }
+                                    if(d.owner !== "") {
+                                        html += "Owner: " +d.owner + "<br>";
+                                    }
+                                    html += "Country: " + d.country_long + "<br>";
+                                    html += "Main Fuel: " + d.fuel1 + "<br>";
+                                    if(d.fuel2 !== "" && d.fuel3 !== "" ) {
+                                     html += "Other Fuels: " + d.fuel2 + ", " + d.fuel3;
+                                    } else
+                                    if(d.fuel2 !== "" && d.fuel3 == "" ) {
+                                     html += "Other Fuels: " + d.fuel2;
+                                    } else
+                                    if(d.fuel2 == "" && d.fuel3 !== "" ) {
+                                     html += "Other Fuels: " + d.fuel3;
+                                    }
+                                    
+                                    
+                                    html += "</span>";
+                                    html += "</div>";
+                                    
+                                    $("#tooltip-container").html(html);
+                                    $(this).attr("fill-opacity", "0.8");
+                                    $("#tooltip-container").show();
+                                    
+                                    var coordinates = d3.mouse(this);
+                                    
+                                    var map_width = $('.choropleth')[0].getBoundingClientRect().width;
+                                    
+                                    if (d3.event.pageX < map_width / 2) {
+                                        d3.select("#tooltip-container")
+                                        .style("top", (d3.event.layerY + 15) + "px")
+                                        .style("left", (d3.event.layerX + 15) + "px");
+                                    } else {
+                                        var tooltip_width = $("#tooltip-container").width();
+                                        d3.select("#tooltip-container")
+                                        .style("top", (d3.event.layerY + 15) + "px")
+                                        .style("left", (d3.event.layerX - tooltip_width - 30) + "px");
+                                    }
+                                })
+                                .on("mouseout", function() {
+                                        $(this).attr("fill-opacity", "1.0");
+                                        $("#tooltip-container").hide();
+                                    })
+                                // still need to work this out
+                                .on('click', function(d){
+                                    if(d.url !== "" ) {
+                                        var html = "";
+
+                                        html += "<div class=\"tooltip_kv\">";
+                                        html += "<span class=\"tooltip_key\">";
+                                        html += "Country: " + d.country_long + "<br>";
+                                        html += "Main Fuel: " + d.fuel1 + "<br>";
+                                        if(d.url !== "" ) {
+                                            html += '<a href="'+ d.url + '"></a>';
+
+                                        }
+                                        html += "</span>";
+                                        html += "</div>";
+
+                                    }
+                                })
                                 ;
 
                             svg.attr("height", config.height * 2.2 / 3);
