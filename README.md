@@ -4,6 +4,9 @@ Given some data regarding power plants, clean the data to a useable format, and 
 
 ## Instructions
 
+The simplest way to access the visualisation is: https://jvh.github.io/power_plant_visualisation/
+
+Alternatively:
 1. Start a server using a command such as `python -m http.server 3000`.
 2. Open *index.html* in a web browser by visiting `localhost:3000`.
 

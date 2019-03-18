@@ -128,9 +128,7 @@
                                     <li class="nav-item"><a class="nav-link" href="#visualisationmap">Visualisation</a></li>
                                     
                                 </ul>
-                                <div class="sing-up-button d-lg-none">
-                                    <a href="#">Sign Up Free</a>
-                                </div>
+                                
                             </div>
                         </nav>
                     </div>
@@ -190,30 +188,34 @@
 
 
                     </p>
+                    <p>
+                     Non-Renewable
+                    <ul style="list-style-type:square;">
+                      <li>Coal</li>
+                      <li>Gas</li>
+                      <li>Oil</li>
+                      <li>Nuclear</li>
+                      <li>Wind</li>
+                    </ul> 
+                    </p>
+                    <p>
+                      Other
+                      <ul style="list-style-type:square;">
+                        <li>Other</li>
+                        <li>Waste</li>
+                      </ul> 
+                    </p>
+                                
+                        
 
-                    Non-Renewable
-                        Coal
-                        Gas
-                        Oil
-                        Nuclear
-                        Wind
-
-                    Other
-                        Other
-                        Waste
+                    
 
 	            	<h1>Data Cleaning and Processing </h1>
 	            	<p>
                             As previously mentioned, the data in its original form was unreadable and full of formatting issues. For this reason, an initial data-cleaning stage took place before the data could be further processed and used. Below outlines the data cleaning steps which took place, along with the original & cleaned dataset being available to download.</p>
                 
                 
-                    <h1>Visualisation Features </h1>
-                           <p>
-                                1. 2D map which has clear borders for each country.
-                                2. Zoomable using the mouse scroll wheel (or equivalent mouse zoom).
-                                3. Ability to filter points such that you can view renewable, non-reneweable, and other on the same map in any variation.
-                                4. Energy generation per plant can be represented by the radius of its circle (with large circles being attributed to more generation).
-                           </p>
+                    
                     
                     <h1>Tools and Technologies</h1>
                            <p>
@@ -228,14 +230,7 @@
                             3. Improvements on the map visualisation to include a heatmap of percentage of renewable against non-renewable power plants (and generation) per country/continent.
                             
                             </p>
-                      <h1>Credits</h1>
-                          <p>There are a number of key improvements which could be made to this project, these are outlined below.
-        
-                                    1. Inclusion of a dataset which includes North America.
-                                    2. More extensive dataset which allows for deeper quantative analysis.
-                                    3. Improvements on the map visualisation to include a heatmap of percentage of renewable against non-renewable power plants (and generation) per country/continent.
-                                    
-                                    </p>
+                      
                 </div>
             </div>
         </div>
@@ -337,17 +332,17 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                        <li>1. Looking at the dataset, we can see that some of the IDs are in the column immediately to the left (in the ‘name’) column of their correct column (‘gppd_idnr’). 
+                                        <li>Looking at the dataset, we can see that some of the IDs are in the column immediately to the left (in the ‘name’) column of their correct column (‘gppd_idnr’). 
                                             </li>
-                                        <li>2. In OpenRefine we can see that some of the country_long’s aren’t as they should be. In the case of Australia we have some entries incorrectly entered as being the ‘name’. Looking at the gppd_idnr, we can see this is a case of left-shifting.</li>
-                                        <li>3. We can see in OpenRefine that as the entry has been left-shifted it has left an empty cell in the ‘estimated_generation_gwh’ (rightmost column).</li>
-                                        <li>4. Using Excel we can filter the estimated_generation_gwh column such that we are only viewing the blank cells.
+                                        <li>In OpenRefine we can see that some of the country_long’s aren’t as they should be. In the case of Australia we have some entries incorrectly entered as being the ‘name’. Looking at the gppd_idnr, we can see this is a case of left-shifting.</li>
+                                        <li>We can see in OpenRefine that as the entry has been left-shifted it has left an empty cell in the ‘estimated_generation_gwh’ (rightmost column).</li>
+                                        <li>Using Excel we can filter the estimated_generation_gwh column such that we are only viewing the blank cells.
                                             </li>
-                                        <li>5. Once filtered, we can identify the entries which must be moved by looking at the position of the gppd_idnr entries.
+                                        <li>Once filtered, we can identify the entries which must be moved by looking at the position of the gppd_idnr entries.
                                             </li>
-                                        <li>6. Select all entries that are left-shifted, cut and place them into the next cell over from the country_long (leaving country_long blank).
+                                        <li>Select all entries that are left-shifted, cut and place them into the next cell over from the country_long (leaving country_long blank).
                                             </li>
-                                        <li>7. We have now correctly aligned the left-shifted columns.
+                                        <li>We have now correctly aligned the left-shifted columns.
                                             </li>
                                         <li>Verify that the unique identifier is in the gppd_idnr to confirm that the cells have been shifted correctly.</li>
                                       </ol>
@@ -376,10 +371,10 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                        <li>1. Our dataset contains instances where the entries within the rows have been right-shifted due to an empty space in one of the columns. An example of this is where the data has been right-shifted by a single column such that the ‘country_long’ column is empty and the correct value is instead populated in the immediate right ‘name’ column.</li>
-                                        <li>2. Using excel, we can filter the country_long column to only display blank cells.</li>
-                                        <li>3. Select those cells which are right-shifted (this can be done by identifying those rows with the gppd_idnr entries in the wrong position.</li>
-                                        <li>4. Move them back to their appropriate positions.
+                                        <li>Our dataset contains instances where the entries within the rows have been right-shifted due to an empty space in one of the columns. An example of this is where the data has been right-shifted by a single column such that the ‘country_long’ column is empty and the correct value is instead populated in the immediate right ‘name’ column.</li>
+                                        <li>Using excel, we can filter the country_long column to only display blank cells.</li>
+                                        <li>Select those cells which are right-shifted (this can be done by identifying those rows with the gppd_idnr entries in the wrong position.</li>
+                                        <li>Move them back to their appropriate positions.
                                             </li>
                                         <li>Verify that the unique identifier is in the gppd_idnr to confirm that the cells have been shifted correctly.</li>
                                       </ol>
@@ -408,9 +403,9 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                        <li>1. Using Excel’s filter we are able to identify the values held in each column in an easily readable format (not this can also be done on OpenRefine).</li>
-                                        <li>2. We have identified that the column ‘fuel4’ contains only blank rows.</li>
-                                        <li>3. Remove fuel4 column from our dataset.
+                                        <li>Using Excel’s filter we are able to identify the values held in each column in an easily readable format (not this can also be done on OpenRefine).</li>
+                                        <li>We have identified that the column ‘fuel4’ contains only blank rows.</li>
+                                        <li>Remove fuel4 column from our dataset.
 
                                         </li>
                                     </ol>
@@ -438,10 +433,10 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                        <li>1. In some instances, data is in the wrong place and must be manually moved.</li>
-                                        <li>2. Identify data which is in the incorrect place by using OpenRefine’s text facet on each column.</li>
-                                        <li>3. Once you have identified a problem column, go to Excel and use the filter to remove blank cells within that column.</li>
-                                        <li>4. Locate the issues and fix manually.</li>
+                                        <li>In some instances, data is in the wrong place and must be manually moved.</li>
+                                        <li>Identify data which is in the incorrect place by using OpenRefine’s text facet on each column.</li>
+                                        <li>Once you have identified a problem column, go to Excel and use the filter to remove blank cells within that column.</li>
+                                        <li>Locate the issues and fix manually.</li>
                                     </ol>
                                       <br>
                                       <img src="move_manually.gif">
@@ -467,8 +462,8 @@
                                     <div class="modal-body" >
                                       <ol>
                                         <li>Some rows in the dataset only exist as information pieces regarding the data in the dataset. This could be in the form of, for example, a heading for the data underneath it.</li>
-                                        <li>2. Identify these rows using OpenRefine’s text facet.</li>
-                                        <li>3. Remove through Excel or OpenRefine.
+                                        <li>Identify these rows using OpenRefine’s text facet.</li>
+                                        <li>Remove through Excel or OpenRefine.
                                             </li>
                                     </ol>
                                       <br>
@@ -494,10 +489,10 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                        <li>1. You can identify duplicate rows by putting a text facet (in OpenRefine) on a unique identifier column, in this case the ‘gppd_idnr’ column.</li>
-                                        <li>2. Once you have done that, order by count in order to find those with a count > 1.</li>
-                                        <li>3. Select each of those cases and star all but a single row (given that they are in fact duplicates).</li>
-                                        <li>4. Filter all by stars and select those rows which have been starred using this.</li>
+                                        <li>You can identify duplicate rows by putting a text facet (in OpenRefine) on a unique identifier column, in this case the ‘gppd_idnr’ column.</li>
+                                        <li>Once you have done that, order by count in order to find those with a count > 1.</li>
+                                        <li>Select each of those cases and star all but a single row (given that they are in fact duplicates).</li>
+                                        <li>Filter all by stars and select those rows which have been starred using this.</li>
                                         <li>Remove all the matching rows to remove the duplicates.</li>
                                     </ol>
                                       <br>
@@ -523,14 +518,14 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                        <li>1. Using OpenRefine we are able to automatically identify data which is similar in nature (e.g. say a minor misspelling) and could possibly be merged under a single unifying name.</li>
-                                        <li>2. Go to the column of choice -> edit cells -> cluster and edit.</li>
+                                        <li>Using OpenRefine we are able to automatically identify data which is similar in nature (e.g. say a minor misspelling) and could possibly be merged under a single unifying name.</li>
+                                        <li>Go to the column of choice -> edit cells -> cluster and edit.</li>
                                         <li>In this case we can see that there are 2 similar values “Ebbsfleet Farm Solar Farm” and “Ebbsfleet Solar Farm”.</li>
-                                        <li>4. These can be unified under the name “Ebbsfleet Solar Farm”.</li>
-                                        <li>elect the ‘Merge’ checkbox to confirm the merge.</li>
-                                        <li>6. NOTE: In the case of “Ardoch and Over Enoch Wind Farm” there are 2 locations for the farm under the same name, 1 in Ardoch and another in Over Enoch. It’s important to not merge instances such as these as they are not the same entity and shouldn’t be under the same name. In the case of the ‘name’ column we should only cluster those which obviously don’t have a unique name/identifier.</li>
-                                    <li>7. When you have selected all cells which must be merged, select ‘Merge Selected & Re-Cluster’.</li>
-                                    <li>8. Repeat for columns which would share similar data (for example, don’t attempt to cluster the latitude column as these values are unique to that site).</li>
+                                        <li>These can be unified under the name “Ebbsfleet Solar Farm”.</li>
+                                        <li>Select the ‘Merge’ checkbox to confirm the merge.</li>
+                                        <li>NOTE: In the case of “Ardoch and Over Enoch Wind Farm” there are 2 locations for the farm under the same name, 1 in Ardoch and another in Over Enoch. It’s important to not merge instances such as these as they are not the same entity and shouldn’t be under the same name. In the case of the ‘name’ column we should only cluster those which obviously don’t have a unique name/identifier.</li>
+                                    <li>When you have selected all cells which must be merged, select ‘Merge Selected & Re-Cluster’.</li>
+                                    <li>Repeat for columns which would share similar data (for example, don’t attempt to cluster the latitude column as these values are unique to that site).</li>
                                     </ol>
                                       <br>
                                       <img src="clustering_similar_data.gif">
@@ -555,10 +550,10 @@
                                     </div>
                                     <div class="modal-body" >
                                       <ol>
-                                      <li>1. Some items are misspelt in the data and must be rectified.</li>
-                                      <li>2. We can do a cluster command in OpenRefine to easily display the spellings (and enable automatic detection for clustering purposes).</li>
+                                      <li>Some items are misspelt in the data and must be rectified.</li>
+                                      <li>We can do a cluster command in OpenRefine to easily display the spellings (and enable automatic detection for clustering purposes).</li>
                                     <li>Identify the misspellings and change to the correct spellings.</li>  
-                                    <li>4. Merge Selected & Re-Cluster to merge those selected cells.</li>
+                                    <li>Merge Selected & Re-Cluster to merge those selected cells.</li>
                                     </ol>
                                       <br>
                                       <img src="remove_misspellings.gif">
@@ -584,12 +579,12 @@
                                 <div class="modal-body" >
                                   <ol>
                                   <li>Sometimes data is in the incorrect format/doesn’t follow the standards which other data has been set to. We should make the data conform to the same standards for each column.</li>
-                                <li>2. In this case, we have the instance where country_long entries have ‘UK’, ‘United Kingdom’, and ‘London’.</li>  
+                                <li>In this case, we have the instance where country_long entries have ‘UK’, ‘United Kingdom’, and ‘London’.</li>  
                                 <li>We should put these all under a unified title, in this case ‘United Kingdom’ shall be selected.</li>
-                                <li>4. Similarly, the ‘country’ column has multiple instances of GBR and UK, this should be changed to GBR to fit with the Alpha-3 formats established.</li>
-                              <li>5. ‘Commissioning_year’ column exhibits similar problems which must be rectified. Some values are stored in the form year.month, as this column stores only the years, this should be rectified.</li>  
-                            <li>6. Another example of this being in ‘country’ whereby some countries are listed by their Alpha-2 codes rather than the standard Alpha-3 codes. This is the case with ‘AUS’ and ‘AU’, therefore turn ‘AU’ instances to ‘AUS’ and also the case with ’N-KOR’ (North Korea) with ‘PRK’ being it’s ISO code.</li>  
-                            <li>7. Another case is the ‘estimated_generation_gwh’ column where some values have (gwh) prepended and appended to them, this must be edited and removed.</li>
+                                <li>Similarly, the ‘country’ column has multiple instances of GBR and UK, this should be changed to GBR to fit with the Alpha-3 formats established.</li>
+                              <li>'Commissioning_year’ column exhibits similar problems which must be rectified. Some values are stored in the form year.month, as this column stores only the years, this should be rectified.</li>  
+                            <li>Another example of this being in ‘country’ whereby some countries are listed by their Alpha-2 codes rather than the standard Alpha-3 codes. This is the case with ‘AUS’ and ‘AU’, therefore turn ‘AU’ instances to ‘AUS’ and also the case with ’N-KOR’ (North Korea) with ‘PRK’ being it’s ISO code.</li>  
+                            <li>Another case is the ‘estimated_generation_gwh’ column where some values have (gwh) prepended and appended to them, this must be edited and removed.</li>
                           </ol>
                                   <br>
                                   <img src="unifying_data.gif">
@@ -614,10 +609,10 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                    <li>1. Using the Cluster function in OpenRefine, we are able to identify and alter any obviously incorrect data.</li>
+                                    <li>Using the Cluster function in OpenRefine, we are able to identify and alter any obviously incorrect data.</li>
                                     <li>Such is the case in the ‘commissioning_year’, some dates are in the future. This is likely due to either a misspelling or simply just an incorrect value being inserted.  You must use your own discretion to decide on what changes must be made</li>
-                                    <li>3. In the case of ’15123’ it’s difficult to infer a date from this so this should be made blank.</li>                                          
-                                    <li>4. In the case of ‘200’, we can reasonably assume that this is a misspelling of ‘2000’ so replace with that.</li>
+                                    <li>In the case of ’15123’ it’s difficult to infer a date from this so this should be made blank.</li>                                          
+                                    <li>In the case of ‘200’, we can reasonably assume that this is a misspelling of ‘2000’ so replace with that.</li>
                                   </ol>
                                   <br>
                                   <img src="removing_incorrect.gif">
@@ -642,14 +637,14 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                    <li>1. Once the data has been cleaned, we can begin by making adjustments to the data to make it more complete.</li>  
-                                    <li>2. The main case being exhibited in the ‘country’ and ‘country_long’ columns where many values are left blank.</li>  
-                                    <li>3. If we have one or the other, we are able to infer based on the other similar rows what the corresponding value for the blank column is.</li>  
-                                    <li>4. Apply a text facet to both country and country_long, select each country and determine if there are any blanks.</li>  
-                                    <li>5. Go to a blank cell and place the a value into it by placing the ‘edit’ button.</li>  
-                                    <li>6. Where applicable, you can infer this value using the other values already existing in the table, for example in the case of Chile, we can see that the country code ‘CHL’ is correct. In other cases (such as the case of ‘JPN’) we don’t have any other values in the table to indicate which country_long this must refer to; we instead search these values in a search engine to come to a reasonable conclusion, in this case Japan. We can further confirm these suspicions by searching the longitude/latitude and identifying which country borders they fall into.</li>  
-                                    <li>7. Once you have made the edit, press the ‘Apply to All Identical Cells’ to populate all those empty cells.</li>  
-                                    <li>8. Repeat this where the ‘country’ column hasn’t been filled but the country_long has by filtering the country column to only be those with blank cells.</li>  
+                                    <li>Once the data has been cleaned, we can begin by making adjustments to the data to make it more complete.</li>  
+                                    <li>The main case being exhibited in the ‘country’ and ‘country_long’ columns where many values are left blank.</li>  
+                                    <li>If we have one or the other, we are able to infer based on the other similar rows what the corresponding value for the blank column is.</li>  
+                                    <li>Apply a text facet to both country and country_long, select each country and determine if there are any blanks.</li>  
+                                    <li>Go to a blank cell and place the a value into it by placing the ‘edit’ button.</li>  
+                                    <li>Where applicable, you can infer this value using the other values already existing in the table, for example in the case of Chile, we can see that the country code ‘CHL’ is correct. In other cases (such as the case of ‘JPN’) we don’t have any other values in the table to indicate which country_long this must refer to; we instead search these values in a search engine to come to a reasonable conclusion, in this case Japan. We can further confirm these suspicions by searching the longitude/latitude and identifying which country borders they fall into.</li>  
+                                    <li>Once you have made the edit, press the ‘Apply to All Identical Cells’ to populate all those empty cells.</li>  
+                                    <li>Repeat this where the ‘country’ column hasn’t been filled but the country_long has by filtering the country column to only be those with blank cells.</li>  
                                   </ol>
                                   <br>
                                   <img src="inserting_data.gif">
@@ -674,10 +669,10 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                    <li>1. As the country codes are following the ISO standards, we go off the Alpha-3 codes. We use the website https://knowledgecenter.zuora.com/BB_Introducing_Z_Business/D_Country%2C_State%2C_and_Province_Codes/A_Country_Names_and_Their_ISO_Codes to find the relevant Alpha-3 and country names.</li>  
+                                    <li>As the country codes are following the ISO standards, we go off the Alpha-3 codes. We use the website https://knowledgecenter.zuora.com/BB_Introducing_Z_Business/D_Country%2C_State%2C_and_Province_Codes/A_Country_Names_and_Their_ISO_Codes to find the relevant Alpha-3 and country names.</li>  
                                   <li>In the case of Kosovo, it hasn’t got an ISO Alpha-3 code. Instead, there has been inserted the code ‘KOS’.</li>  
-                                  <li>3. As ‘KOS’ isn’t used by another country, we shall keep that as the country code.</li>
-                                  <li>4. Another issue is that we have some legacy codes, for example USSR (which no longer exists and has been replaced). In this case we must change this to the Russian Federation, RUS.</li>
+                                  <li>As ‘KOS’ isn’t used by another country, we shall keep that as the country code.</li>
+                                  <li>Another issue is that we have some legacy codes, for example USSR (which no longer exists and has been replaced). In this case we must change this to the Russian Federation, RUS.</li>
                                   </ol>
                                   <br>
                                   <img src="country_code_iso_issues.gif">
@@ -702,10 +697,10 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                  <li>1. Some countries listed in country_name aren’t the country names themselves, but descriptors (perhaps also including the name).</li>
-                                <li>2. For example, ‘North Vietnam’ uses the North descriptor to describe the location relative to Vietnam. However, this isn’t the country itself and should be altered to ‘Vietnam’.</li>  
-                                <li>3. Create a text facet on the country_name and locate any countries with incorrect names.</li>
-                                <li>4. Filter by that name and edit an entry, at this point click apply all.</li>
+                                  <li>Some countries listed in country_name aren’t the country names themselves, but descriptors (perhaps also including the name).</li>
+                                <li>For example, ‘North Vietnam’ uses the North descriptor to describe the location relative to Vietnam. However, this isn’t the country itself and should be altered to ‘Vietnam’.</li>  
+                                <li>Create a text facet on the country_name and locate any countries with incorrect names.</li>
+                                <li>Filter by that name and edit an entry, at this point click apply all.</li>
                                 </ol>
                                   <br>
                                   <img src="country_long_issues.gif">
@@ -730,11 +725,11 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                  <li>1. We have some errors such as #NAME, NaN, and Nil.</li>
-                                  <li>2. Given that we are unable to process this data, it’s reasonable to make these blank.</li>
-                                  <li>3. Go to a column, perform a text facet, and search for any instances of error codes.</li>
-                                  <li>4. Once you have identified an error code, select it. Once selected go to one of the error code cells and press ‘edit’. At this point replace with nothing and press apply to all.</li>
-                                <li>5. Repeat for all error codes in all cells.</li>  
+                                  <li>We have some errors such as #NAME, NaN, and Nil.</li>
+                                  <li>Given that we are unable to process this data, it’s reasonable to make these blank.</li>
+                                  <li>Go to a column, perform a text facet, and search for any instances of error codes.</li>
+                                  <li>Once you have identified an error code, select it. Once selected go to one of the error code cells and press ‘edit’. At this point replace with nothing and press apply to all.</li>
+                                <li>Repeat for all error codes in all cells.</li>  
                                 </ol>
                                   <br>
                                   <img src="erros_with_blanks.gif">
@@ -759,10 +754,10 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                  <li>1. There are some unusual characters existing in place of other characters. This is likely due to some kind of encoding issue with inserting/retrieving the data.</li>
-                                  <li>2. In order to fix this, we use Excel to identify those unusual character sets (the characters will be obvious between 2 normal characters in most cases).</li>
-                                  <li>3. Once we have found an unusual character set, we can use hints to discover what character set the encoding represents. For example,  in the case of ‘Sonelgaz Production de l'Electricite’ we had the encoding set replacing ‘√¢‚Ç¨‚Ñ¢’ replacing a single apostrophe, this was more obvious than some cases given that there existed entries without the encoding issues. If you’re unable to find any fixed instances, you can either intelligently infer what the characters are depending on context, otherwise make them blank. In most cases, these are encoding issues with accented characters.</li>
-                                  <li>4. Using Excel’s find and replace functionality, we can replace the encoding character set with the correct ASCII character set.</li>
+                                  <li>There are some unusual characters existing in place of other characters. This is likely due to some kind of encoding issue with inserting/retrieving the data.</li>
+                                  <li>In order to fix this, we use Excel to identify those unusual character sets (the characters will be obvious between 2 normal characters in most cases).</li>
+                                  <li>Once we have found an unusual character set, we can use hints to discover what character set the encoding represents. For example,  in the case of ‘Sonelgaz Production de l'Electricite’ we had the encoding set replacing ‘√¢‚Ç¨‚Ñ¢’ replacing a single apostrophe, this was more obvious than some cases given that there existed entries without the encoding issues. If you’re unable to find any fixed instances, you can either intelligently infer what the characters are depending on context, otherwise make them blank. In most cases, these are encoding issues with accented characters.</li>
+                                  <li>Using Excel’s find and replace functionality, we can replace the encoding character set with the correct ASCII character set.</li>
                                   </ol>
                                   <br>
                                   <img src="unusual_characters.gif">
@@ -787,10 +782,10 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                  <li>1. Some numbers in the dataset have multiple decimal places, some have none.</li>
-                                  <li>2. We should decide on a standard such that all values are similarly accurate and for readability purposes.</li>
-                                  <li>3. So, selecting all those columns which are numbers (and not expected to be whole, e.g. year) in Excel, we can then right click on the column and select ‘format cells’.</li>
-                                <li>4. Once that is done, we navigate to the Numbers tab at which point we select the number of decimal places to be 3.</li>  
+                                  <li>Some numbers in the dataset have multiple decimal places, some have none.</li>
+                                  <li>We should decide on a standard such that all values are similarly accurate and for readability purposes.</li>
+                                  <li>So, selecting all those columns which are numbers (and not expected to be whole, e.g. year) in Excel, we can then right click on the column and select ‘format cells’.</li>
+                                <li>Once that is done, we navigate to the Numbers tab at which point we select the number of decimal places to be 3.</li>  
                                 </ol>
                                   <br>
                                   <img src="decimal_places.gif">
@@ -815,9 +810,9 @@
                                 </div>
                                 <div class="modal-body" >
                                   <ol>
-                                  <li>1. Some of the values in the columns are extremely large. This is obviously not accurate. As there is no easy way to identify where the mistake was made, I shall be removing all extremely large values.</li>
-                                <li>2. To do this we use Excel’s sort feature. Once sorted we can examine the data for any anomalies. </li>  
-                                <li>3. Once identified, remove the data.</li>
+                                  <li>Some of the values in the columns are extremely large. This is obviously not accurate. As there is no easy way to identify where the mistake was made, I shall be removing all extremely large values.</li>
+                                <li>To do this we use Excel’s sort feature. Once sorted we can examine the data for any anomalies. </li>  
+                                <li>Once identified, remove the data.</li>
                                 </ol>
                                   <br>
                                   <img src="remove_extreme_values.gif">
@@ -896,16 +891,34 @@
                         <h2>Visualisation</h2>
                         <div class="line-shape"></div>
                     </div>
+                    <div>
+                      The visualisation produced as part of this coursework aims to encapsulate important information about power plants around the world. For the purposes of depicted locations, and providing a visual representation of the distribution of power stations producing re-newable and non renewable energy, a map was deemed most appropriate.
+                      A flat 2D map  projection which has clear borders for each country was used, and the (latitude, longitude) coordinates for each powerstation in the dataset were plotted.
+                      
+                      <br><br>This visualisation is interactive in the following ways:
+                      <ul>
+                        <li>The map is zoomable using the mouse scroll wheel (or equivalent mouse zoom). The size of powerstation coordinates scale with zoom, so that at higher zoom levels individual poitions of the power stations can be seen clearly.</li>
+                        <li>There is the aility to filter points such that powerstations which mainly produce renewable, non-reneweable, and other energy can be seen clearly on the same map in any variation. The filters can be applied using the checkboxes above the map.
+                          
+                        </li>
+                        <li>Hovering over any power station will produce a tool tip with important information about the site, including the name and year of commission of the power plant, its main fuel type, as well as other secondary fuel types, and finaly the country in which the power station is built.</li>
+                      </ul>
+                      Renewable energy was classed as coming from the following sources: Biomass, Geothermal, Hydro, Solar, and Wind.
+                      <br> Non-renewble energy comes from: Coal, Gas, Nuclear, and Oil.
+                      <br>Other energy sources include Waste and unspecified fuel types. 
+                                4. Energy generation per plant can be represented by the radius of its circle (with large circles being attributed to more generation).
+                              </div>
                 </div>
             </div>
-            
+<br> <br>
             <div id="tooltip-container"></div>
             <div class="checkmarks" id="canvas-svg">
                 <form action="/action_page.php">
                     <span style="padding-right:5px"><input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" checked> Renewable</span><span class="dot green"></span>
                     <span style="padding-right:5px; padding-left:20px; "><input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable" checked>Non-Renewable</span><span class="dot red"></span>
                     <span style="padding-right:5px;  padding-left:20px; "><input type="checkbox" name="Other" class='filter_button' id='isselected3' value="Other" checked>Other</span><span class="dot blue"></span>
-                </form>
+                    
+                  </form>
 
 
             </div>
@@ -1185,110 +1198,7 @@
                             var width = config.width,
                                 height = config.height;
 
-                            ///////////////////////
-                            // COLOURING THE MAP // 
-                            ///////////////////////
-                           
-                            // var COLOR_COUNTS = 9;
-
-                            // function Interpolate(start, end, steps, count) {
-                            //     var s = start,
-                            //         e = end,
-                            //         final = s + (((e - s) / steps) * count);
-                            //     return Math.floor(final);
-                            // }
-
-                            // function Color(_r, _g, _b) {
-                            //     var r, g, b;
-                            //     var setColors = function(_r, _g, _b) {
-                            //         r = _r;
-                            //         g = _g;
-                            //         b = _b;
-                            //     };
-
-                            //     setColors(_r, _g, _b);
-                            //     this.getColors = function() {
-                            //         var colors = {
-                            //             r: r,
-                            //             g: g,
-                            //             b: b
-                            //         };
-                            //         return colors;
-                            //     };
-                            // }
-
-                            // function hexToRgb(hex) {
-                            //     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                            //     return result ? {
-                            //         r: parseInt(result[1], 16),
-                            //         g: parseInt(result[2], 16),
-                            //         b: parseInt(result[3], 16)
-                            //     } : null;
-                            // }
-
-                            // function valueFormat(d) {
-                            //     if (d > 1000000000) {
-                            //         return Math.round(d / 1000000000 * 10) / 10 + "B";
-                            //     } else if (d > 1000000) {
-                            //         return Math.round(d / 1000000 * 10) / 10 + "M";
-                            //     } else if (d > 1000) {
-                            //         return Math.round(d / 1000 * 10) / 10 + "K";
-                            //     } else {
-                            //         return d;
-                            //     }
-                            // }
-
-                            // var COLOR_FIRST = config.color0, COLOR_LAST = config.color1;
-
-                            // var rgb = hexToRgb(COLOR_FIRST);
-                            // var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
-
-                            // rgb = hexToRgb(COLOR_LAST);
-                            // var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
-
-                            // var startColors = COLOR_START.getColors(),
-                            //     endColors = COLOR_END.getColors();
-
-                            // var colors = [];
-
-                            // for (var i = 0; i < COLOR_COUNTS; i++) {
-                            //     var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
-                            //     var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
-                            //     var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
-                            //     colors.push(new Color(r, g, b));
-                            // }
-
-                            // var MAP_KEY = config.data0;
-                            // var MAP_VALUE = config.data1;
-
-                            // color = d3.scaleSequentialQuantile([...data.values()], t => d3.interpolatePiYG(1 - t))
-                            // legend = g => {
-                            //     const width = 240;
-
-                            //     g.append("image")
-                            //         .attr("width", width)
-                            //         .attr("height", 8)
-                            //         .attr("preserveAspectRatio", "none")
-                            //         .attr("xlink:href", ramp(color.interpolator()).toDataURL());
-
-                            //     g.append("text")
-                            //         .attr("class", "caption")
-                            //         .attr("y", -6)
-                            //         .attr("fill", "#000")
-                            //         .attr("text-anchor", "start")
-                            //         .attr("font-weight", "bold")
-                            //         .text(data.title);
-
-                            //     g.call(d3.axisBottom(d3.scalePoint(["lowest", "median", "highest"], [0, width]))
-                            //         .tickSize(13))
-                            //         .select(".domain")
-                            //         .remove();
-                            //     }
-
-                            //////////////////////
-                            // CREATING THE MAP //
-                            //////////////////////
-
+                            
                             var projection = d3.geo.mercator()
                                 .scale((width + 1) / 2 / Math.PI)
                                 .translate([width / 2.15, height / 2])
@@ -1316,18 +1226,6 @@
                                 return Math.log(val);
                             }
 
-                            // data.forEach(function(d) {
-                            //     valueHash[d[MAP_KEY]] = +d[MAP_VALUE];
-                            // });
-
-                            // var quantize = d3.scale.quantize()
-                            //     .domain([0, 1.0])
-                            //     .range(d3.range(COLOR_COUNTS).map(function(i) { return i }));
-
-                            // quantize.domain([d3.min(data, function(d) {
-                            //     return (+d[MAP_VALUE])}),
-                            //     d3.max(data, function(d) {
-                            //         return (+d[MAP_VALUE])})]);
 
                             d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/world-topo-min.json", function(error, world) {
                             var countries = topojson.feature(world, world.objects.countries).features;
@@ -1339,29 +1237,15 @@
 
                             var g = svg.append("g");
 
-                            // svg.append("g")
-                            //     .attr("transform", "translate(600,40)")
-                            //     .call(legend);
-
-                            // svg.append("g")
-                            //     .selectAll("path")
-                            //     .data(countries)
-                            //     .join("path")
-                            //     .attr("fill", d => color(data.get(d.id)))
-                            //     .attr("d", path)
-                            //     .append("title")
-                            //     .text(d => `${data.get(d.id)}%`);
+                        
 
                             g.append("path")
-                                .datum({type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]})
+                                
                                 .attr("class", "equator")
                                 .attr("d", path);
 
                             svg.append("path")
-                                // .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
-                                // .attr("fill", "none")
-                                // .attr("stroke", "white")
-                                // .attr("stroke-linejoin", "round")
+                        
                                 .attr("d", path);
 
                             var country = g.selectAll(".country").data(countries);                        
@@ -1380,39 +1264,7 @@
                                         return "#ccc";
                                     }
                                 });
-                                /*.on("mousemove", function(d) {
-                                    var html = "";
-
-                                    html += "<div class=\"tooltip_kv\">";
-                                    html += "<span class=\"tooltip_key\">";
-                                    html += Object.keys(d.properties) + '<br>';
-                                    html += data.country_codes
-                                    html += "</span>";
-                                    html += "</div>";
-                                    
-                                    $("#tooltip-container").html(html);
-                                    $(this).attr("fill-opacity", "0.8");
-                                    $("#tooltip-container").show();
-                                    
-                                    var coordinates = d3.mouse(this);
-                                    
-                                    var map_width = $('.choropleth')[0].getBoundingClientRect().width;
-                                    
-                                    if (d3.event.pageX < map_width / 2) {
-                                        d3.select("#tooltip-container")
-                                        .style("top", (d3.event.layerY + 15) + "px")
-                                        .style("left", (d3.event.layerX + 15) + "px");
-                                    } else {
-                                        var tooltip_width = $("#tooltip-container").width();
-                                        d3.select("#tooltip-container")
-                                        .style("top", (d3.event.layerY + 15) + "px")
-                                        .style("left", (d3.event.layerX - tooltip_width - 30) + "px");
-                                    }
-                                })
-                                .on("mouseout", function() {
-                                        $(this).attr("fill-opacity", "1.0");
-                                        $("#tooltip-container").hide();
-                                    });*/
+                               
                             
                             g.append("path")
                                 .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
@@ -1647,6 +1499,8 @@
                             
                                 //zoom and pan functionality (originally obtained from https://codepen.io/jamesthomson/pen/wMzQYG?editors=1010)
                                 var zoom = d3.behavior.zoom()
+                                    
+
                                     // Limits the zooming factor
                                     .scaleExtent([1, 50])
                                     .on("zoom",function() {
@@ -1684,6 +1538,7 @@
             <!-- ***** Javascript End ***** -->
         </div>
     </section>
+
 
 
     <!-- ***** Footer Area (Copyright Text) ***** -->
