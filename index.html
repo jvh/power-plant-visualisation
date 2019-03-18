@@ -40,7 +40,12 @@
 
 <!-- CSS Style (obtained from https://vida.io/gists/KuoWAKajdT7Q5q3Lt) -->
 <style>   
-        
+    /* Obtained from https://html.com/paragraphs/ */
+    .indented {
+        padding-left: 50pt;
+        padding-right: 50pt;
+    }
+    
     #canvas {
     }
     
@@ -169,14 +174,19 @@
 	            	<h1>Dataset </h1>
 	            	<p>This dataset represents power plants across the globe, with a few exclusions including the entirety of North America. The dataset includes information regarding the fuel used, energy produced (in gwh), name, and location. The original dataset has a number of inconsistencies in its format which not only affect readability, but also processing. Because of this, the data had to undergo a 'cleaning' stage where these errors were addressed and fixed where possible.</p>
                     <p>The data has been categorised into 'Renewable', 'Non-Renewable', 'and 'Other' according to the main fuel type used by the power plant (represented as 'fuel1' in the dataset). Renewable energies are those which come from renewable sources which are regularly replenished and don't require vast amounts of time. Non-renewable energy encompasses energy which originates from sources which are non-renewable, that is it exceeds the human lifetime to be replenished. Finally, we categorise 'Other' as being power plants which consume an 'other' fueltype as defined in the dataset and those power plants whose primary fuel is 'waste' -- as argued by <a href="url">https://www.renewableenergyworld.com/ugc/articles/2009/09/is-wastetoenergy-renewable.html</a>, waste fits into neither renewable or non-renewable. For this reason it seems appropriate to classify this as being 'Other' as this is entirely dependent on the type of waste being used, the method of using the waste, etc.; this is done on a plant-by-plant basis and this data is not available with the current dataset.</p>   
+                    <p>We have classified the primary fuel types according to the following specification:</p>
+                    <p>
+                    <b>Renewable</b><br />
+                    <ul style="list-style-type:square;">
+                            <li>Biomass</li>
+                            <li>Geothermal</li>
+                            <li>Hydro</li>
+                            <li>Solar</li>
+                          </ul>
+        
 
-                    We have classified the primary fuel types according to the following specification:
 
-                    Renewable
-                        Biomass
-                        Geothermal
-                        Hydro
-                        Solar
+                    </p>
 
                     Non-Renewable
                         Coal
@@ -215,9 +225,9 @@
             <div id="tooltip-container"></div>
             <div class="checkmarks" id="canvas-svg">
                 <form action="/action_page.php">
-                    <input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" checked><span class="checkmark"></span> Renewable
-                    <input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable" checked><span class="checkmark"></span>Non-Renewable
-                    <input type="checkbox" name="Other" class='filter_button' id='isselected3' value="Other" checked><span class="checkmark"></span>Other
+                    <span style="padding-right:5px"><input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" checked> Renewable</span><span class="dot green"></span>
+                    <span style="padding-right:5px; padding-left:20px; "><input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable" checked>Non-Renewable</span><span class="dot red"></span>
+                    <span style="padding-right:5px;  padding-left:20px; "><input type="checkbox" name="Other" class='filter_button' id='isselected3' value="Other" checked>Other</span><span class="dot blue"></span>
                 </form>
 
 
@@ -502,77 +512,77 @@
                             // COLOURING THE MAP // 
                             ///////////////////////
                            
-                            var COLOR_COUNTS = 9;
+                            // var COLOR_COUNTS = 9;
 
-                            function Interpolate(start, end, steps, count) {
-                                var s = start,
-                                    e = end,
-                                    final = s + (((e - s) / steps) * count);
-                                return Math.floor(final);
-                            }
+                            // function Interpolate(start, end, steps, count) {
+                            //     var s = start,
+                            //         e = end,
+                            //         final = s + (((e - s) / steps) * count);
+                            //     return Math.floor(final);
+                            // }
 
-                            function Color(_r, _g, _b) {
-                                var r, g, b;
-                                var setColors = function(_r, _g, _b) {
-                                    r = _r;
-                                    g = _g;
-                                    b = _b;
-                                };
+                            // function Color(_r, _g, _b) {
+                            //     var r, g, b;
+                            //     var setColors = function(_r, _g, _b) {
+                            //         r = _r;
+                            //         g = _g;
+                            //         b = _b;
+                            //     };
 
-                                setColors(_r, _g, _b);
-                                this.getColors = function() {
-                                    var colors = {
-                                        r: r,
-                                        g: g,
-                                        b: b
-                                    };
-                                    return colors;
-                                };
-                            }
+                            //     setColors(_r, _g, _b);
+                            //     this.getColors = function() {
+                            //         var colors = {
+                            //             r: r,
+                            //             g: g,
+                            //             b: b
+                            //         };
+                            //         return colors;
+                            //     };
+                            // }
 
-                            function hexToRgb(hex) {
-                                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                                return result ? {
-                                    r: parseInt(result[1], 16),
-                                    g: parseInt(result[2], 16),
-                                    b: parseInt(result[3], 16)
-                                } : null;
-                            }
+                            // function hexToRgb(hex) {
+                            //     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                            //     return result ? {
+                            //         r: parseInt(result[1], 16),
+                            //         g: parseInt(result[2], 16),
+                            //         b: parseInt(result[3], 16)
+                            //     } : null;
+                            // }
 
-                            function valueFormat(d) {
-                                if (d > 1000000000) {
-                                    return Math.round(d / 1000000000 * 10) / 10 + "B";
-                                } else if (d > 1000000) {
-                                    return Math.round(d / 1000000 * 10) / 10 + "M";
-                                } else if (d > 1000) {
-                                    return Math.round(d / 1000 * 10) / 10 + "K";
-                                } else {
-                                    return d;
-                                }
-                            }
+                            // function valueFormat(d) {
+                            //     if (d > 1000000000) {
+                            //         return Math.round(d / 1000000000 * 10) / 10 + "B";
+                            //     } else if (d > 1000000) {
+                            //         return Math.round(d / 1000000 * 10) / 10 + "M";
+                            //     } else if (d > 1000) {
+                            //         return Math.round(d / 1000 * 10) / 10 + "K";
+                            //     } else {
+                            //         return d;
+                            //     }
+                            // }
 
-                            var COLOR_FIRST = config.color0, COLOR_LAST = config.color1;
+                            // var COLOR_FIRST = config.color0, COLOR_LAST = config.color1;
 
-                            var rgb = hexToRgb(COLOR_FIRST);
-                            var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
+                            // var rgb = hexToRgb(COLOR_FIRST);
+                            // var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
 
-                            rgb = hexToRgb(COLOR_LAST);
-                            var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
+                            // rgb = hexToRgb(COLOR_LAST);
+                            // var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
 
-                            var startColors = COLOR_START.getColors(),
-                                endColors = COLOR_END.getColors();
+                            // var startColors = COLOR_START.getColors(),
+                            //     endColors = COLOR_END.getColors();
 
-                            var colors = [];
+                            // var colors = [];
 
-                            for (var i = 0; i < COLOR_COUNTS; i++) {
-                                var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
-                                var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
-                                var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
-                                colors.push(new Color(r, g, b));
-                            }
+                            // for (var i = 0; i < COLOR_COUNTS; i++) {
+                            //     var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
+                            //     var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
+                            //     var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
+                            //     colors.push(new Color(r, g, b));
+                            // }
 
-                            var MAP_KEY = config.data0;
-                            var MAP_VALUE = config.data1;
+                            // var MAP_KEY = config.data0;
+                            // var MAP_VALUE = config.data1;
 
                             // color = d3.scaleSequentialQuantile([...data.values()], t => d3.interpolatePiYG(1 - t))
                             // legend = g => {
@@ -629,18 +639,18 @@
                                 return Math.log(val);
                             }
 
-                            data.forEach(function(d) {
-                                valueHash[d[MAP_KEY]] = +d[MAP_VALUE];
-                            });
+                            // data.forEach(function(d) {
+                            //     valueHash[d[MAP_KEY]] = +d[MAP_VALUE];
+                            // });
 
-                            var quantize = d3.scale.quantize()
-                                .domain([0, 1.0])
-                                .range(d3.range(COLOR_COUNTS).map(function(i) { return i }));
+                            // var quantize = d3.scale.quantize()
+                            //     .domain([0, 1.0])
+                            //     .range(d3.range(COLOR_COUNTS).map(function(i) { return i }));
 
-                            quantize.domain([d3.min(data, function(d) {
-                                return (+d[MAP_VALUE])}),
-                                d3.max(data, function(d) {
-                                    return (+d[MAP_VALUE])})]);
+                            // quantize.domain([d3.min(data, function(d) {
+                            //     return (+d[MAP_VALUE])}),
+                            //     d3.max(data, function(d) {
+                            //         return (+d[MAP_VALUE])})]);
 
                             d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/world-topo-min.json", function(error, world) {
                             var countries = topojson.feature(world, world.objects.countries).features;
@@ -962,17 +972,25 @@
                                 var zoom = d3.behavior.zoom()
                                     // Limits the zooming factor
                                     .scaleExtent([1, 50])
-                                    
                                     .on("zoom",function() {
                                         // var t = svg.attr("transform", d3.event.transform);
                                         // svg.selectAll("circle").attr("transform", "scale(" + 1/t.k + ")");
                                         // console.log(t)
 
-                                        g.attr("transform","translate("+ 
-                                            d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-                                        g.selectAll("path")  
-                                            .attr("d", path.projection(projection)); 
+                                        // g.attr("transform","translate("+ 
+                                        //     d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+                                        // g.selectAll("path")  
+                                        //     .attr("d", path.projection(projection)); 
 
+                                        // source: https://stackoverflow.com/questions/27460534/keep-d3-objects-size-constant-on-map-while-zoom-in-out
+                                        g.attr("transform","translate("+ 
+                                        d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+                                    g.selectAll("circle")
+                                        .attr("d", path.projection(projection))
+                                        .attr("r", 2/zoom.scale());
+                                    g.selectAll("path")  
+                                        .attr("d", path.projection(projection)); 
+                                        
                                 });
                                 // zoom.on("zoom", function onZoomed() {
 

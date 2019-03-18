@@ -1319,11 +1319,28 @@ p {
     margin-bottom: 0;
 }
 
-
-input[type="checkbox"]:checked + label::after {
-    
-    background: red;
-    
- }
- 
+.box {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
+  }
   
+  .red {
+    background-color: red;
+  }
+  
+  .green {
+    background-color: green;
+  }
+  
+  .blue {
+    background-color: blue;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
