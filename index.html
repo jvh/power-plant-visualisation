@@ -34,6 +34,11 @@
     <!-- Imports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="//d3js.org/topojson.v1.min.js"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 
 <!-- CSS Style (obtained from https://vida.io/gists/KuoWAKajdT7Q5q3Lt) -->
@@ -191,11 +196,20 @@
             </div>
             
             <div id="tooltip-container"></div>
-            <div id="canvas-svg"></div>
+            <div id="canvas-svg">
+                <form action="/action_page.php">
+                    <input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" > Renewable
+                    <input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable">Non-Renewable
+                    <input type="checkbox" name="Other" class='filter_button' id='isselected3' value="Other" >Other
+                </form>
+
+
+            </div>
             
                     <script>
 
                         // Stores a list of the country codes and their corresponding country names
+                        // onchange="filterSites(this)"
                         var country_codes = {
                             "AFG": "Afghanistan",
                             "ALA": "Aland Islands",
@@ -590,7 +604,8 @@
                                 .datum(graticule)
                                 .attr("class", "graticule")
                                 .attr("d", path);
-
+                            
+                            
                             var valueHash = {};
 
                             function log10(val) {
@@ -660,8 +675,8 @@
                                     } else {
                                         return "#ccc";
                                     }
-                                })
-                                .on("mousemove", function(d) {
+                                });
+                                /*.on("mousemove", function(d) {
                                     var html = "";
 
                                     html += "<div class=\"tooltip_kv\">";
@@ -693,7 +708,7 @@
                                 .on("mouseout", function() {
                                         $(this).attr("fill-opacity", "1.0");
                                         $("#tooltip-container").hide();
-                                    });
+                                    });*/
                             
                             g.append("path")
                                 .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
@@ -701,13 +716,43 @@
                                 .attr("d", path);
                             
                             // Plot power plant positions (sourced from https://codepen.io/jamesthomson/pen/wMzQYG?editors=1010)
+                            function plotPoints(plants) {
+                        
+                                // d3.selectAll(".filter_button").on("change", function() {
+                                                        
+                                //                         // I *think* "inline" is the default.
+                                //                         if(document.getElementById('isselected1').checked && 
+                                //                         document.getElementById('isselected2').checked &&
+                                //                         document.getElementById('isselected3').checked) {
+                                //                             g.selectAll("circle").remove()
+                                //                             plotPoints(filterPlantsRenewable)
+                                                            
+                                //                         } else if(document.getElementById('isselected1').checked && 
+                                //                         document.getElementById('isselected2').checked ) {
+                                //                             g.selectAll("circle").remove()
+                                //                             plotPoints(filterPlantsRenewable)
+                                //                             plotPoints(filterPlantsNonRenewable)
+                                //                         } else if(document.getElementById('isselected1').checked && 
+                                //                         document.getElementById('isselected3').checked) {
+                                //                             g.selectAll("circle").remove()
+                                //                             plotPoints(filterPlantsRenewable)
+                                //                             plotPoints(filterPlantsOther)
+                                //                         } else if(!document.getElementById('isselected1').checked && 
+                                //                         document.getElementById('isselected2').checked) {
+                                //                             g.selectAll("circle").remove()
+                                //                             plotPoints(filterPlantsOther)
+                                //                             plotPoints(filterPlantsNonRenewable)
+                                //                         }
+                                //                     });
+
                             var locations = g.selectAll("circle")
-                                .data(data)
+                                .data(plants)
                                 .enter()
                                 .append("circle")
                                 .attr("cx", function(d) {return projection([d.longitude, config.data0])[0];})
                                 .attr("cy", function(d) {return projection([d.longitude, d.latitude])[1];})
                                 .attr("r", 1)
+                                .attr("class", "symbol")
                                 .style("fill", "red")
                                 .style("opacity", 0.8)
                                 .on("mousemove", function(d) {
@@ -780,15 +825,66 @@
                                         html += "</div>";
 
                                     }
-                                })
-                                ;
+                                });
+                            }
+
+
+
+                           
+                                                        
+                            var filterPlantsOther = data.filter(function(d){
+                                    if(d["fuel1"] == "Other" || d["fuel1"] == "Waste") {
+                                        return d
+                                    }
+                            })
+
+                            var filterPlantsRenewable = data.filter(function(d){
+                                    if(d["fuel1"] == "Biomass" || d["fuel1"] == "Hydro" || d["fuel1"] == "Geothermal" || d["fuel1"] == "Solar" || d["fuel1"] == "Wind" ) {
+                                        return d
+                                    }
+                            })
+
+                            var filterPlantsNonRenewable = data.filter(function(d){
+                                    if(d["fuel1"] == "Oil" || d["fuel1"] == "Gas" || d["fuel1"] == "Coal" || d["fuel1"] == "Nuclear") {
+                                        return d
+                                    }
+                            })
+
+                            d3.selectAll(".filter_button").on("change", function() {
+                                                        
+                                                        //                         // I *think* "inline" is the default.
+                                                                                if(document.getElementById('isselected1').checked) {
+                                                                                    plotPoints(filterPlantsRenewable);
+
+                                                                                } 
+
+                                                                                if(document.getElementById('isselected2').checked) {
+                                                                                    plotPoints(filterPlantsNonRenewable);
+
+                                                                                } 
+
+                                                                                if(document.getElementById('isselected3').checked) {
+                                                                                plotPoints(filterPlantsOther);
+
+                                                                                } 
+                                                                                
+                                                                            });
+
+                            // plotPoints(data);
+
+
+
+
+
+
+
 
                             svg.attr("height", config.height * 2.2 / 3);
                             
                                 //zoom and pan functionality (originally obtained from https://codepen.io/jamesthomson/pen/wMzQYG?editors=1010)
                                 var zoom = d3.behavior.zoom()
                                     // Limits the zooming factor
-                                    .scaleExtent([1, 30])
+                                    .scaleExtent([1, 50])
                                     .on("zoom",function() {
                                         g.attr("transform","translate("+ 
                                             d3.event.translate.join(",")+")scale("+d3.event.scale+")");
@@ -800,7 +896,14 @@
                                 
 
 
-                        d3.select(self.frameElement).style("height", (height * 2.3 / 3) + "px");});
+                        d3.select(self.frameElement).style("height", (height * 2.3 / 3) + "px");
+                    
+                    
+                        
+                                                
+                    
+                    
+                    });
 
                     </script>
                     
