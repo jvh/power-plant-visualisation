@@ -197,9 +197,6 @@
             
             <div id="tooltip-container"></div>
             <div id="canvas-svg">
-                    <!-- <form id="myform">
-                            syn<input type="checkbox" name="checkfield" id="g01-01"  onchange="doalert(this)"/>
-                        </form> -->
                 <form action="/action_page.php">
                     <input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" > Renewable
                     <input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable">Non-Renewable
@@ -827,36 +824,97 @@
                                     }
                             })
 
-                            // function doalert(checkboxElem) {
-                            //     if(document.getElementById('isselected1').checked) {
-                            //         console.log('ok')
+                            var filt_other_renew = data.filter(function(d){
+                                    if(d["fuel1"] == "Other" || d["fuel1"] == "Waste" || d["fuel1"] == "Biomass" || d["fuel1"] == "Hydro" || d["fuel1"] == "Geothermal" || d["fuel1"] == "Solar" || d["fuel1"] == "Wind" ) {
+                                        return d
+                                    }
+                            })
 
-                            //     } else {
-                            //         console.log('yup')
+                            var filt_renew_non = data.filter(function(d){
+                                if(d["fuel1"] == "Biomass" || d["fuel1"] == "Hydro" || d["fuel1"] == "Geothermal" || d["fuel1"] == "Solar" || d["fuel1"] == "Wind" || d["fuel1"] == "Oil" || d["fuel1"] == "Gas" || d["fuel1"] == "Coal" || d["fuel1"] == "Nuclear") {
+                                        return d
+                                    }
+                            })
 
-                            //     }
-                            // }
+                            var filt_non_other = data.filter(function(d){
+                                if(d["fuel1"] == "Oil" || d["fuel1"] == "Gas" || d["fuel1"] == "Coal" || d["fuel1"] == "Nuclear" || d["fuel1"] == "Other" || d["fuel1"] == "Waste") {
+                                        return d
+                                    }
+                            })
 
-                            d3.selectAll(".filter_button").on("change", function() {
-                                                        
+                            var filt_all = data.filter(function(d){
+                                if(d["fuel1"] == "Biomass" || d["fuel1"] == "Hydro" || d["fuel1"] == "Geothermal" || d["fuel1"] == "Solar" || d["fuel1"] == "Wind" || d["fuel1"] == "Oil" || d["fuel1"] == "Gas" || d["fuel1"] == "Coal" || d["fuel1"] == "Nuclear" || d["fuel1"] == "Other" || d["fuel1"] == "Waste") {
+                                        return d
+                                    }
+                            })
+
+                            
+                   d3.selectAll(".filter_button").on("change", function() {
+                                
+                                var ticked_1 = false
+                                var ticked_2 = false
+                                var ticked_3 = false
+                                g.selectAll('circle')
+                                    .remove()
                                     // I *think* "inline" is the default.
                                 if(document.getElementById('isselected1').checked) {
-                                    plotPoints(filterPlantsRenewable);
-                                } else {
-                                    g.selectAll('circle')
-                                        .remove()
+                                    ticked_1 = true
 
                                 }
+
+
+                                    // g.selectAll('circle')
+                                    //     .remove()
+                                
 
                                 if(document.getElementById('isselected2').checked) {
-                                    plotPoints(filterPlantsNonRenewable);
                                     console.log('34')
-                                }
+                                    ticked_2 = true
+                                } 
 
                                 if(document.getElementById('isselected3').checked) {
-                                    plotPoints(filterPlantsOther);
+                                    ticked_3 = true
                                 } 
+
+
                                 
+                                // console.log('im here')
+                                // console.log(ticked_1)
+                                // console.log(ticked_2)
+
+
+
+                                if (ticked_1 == true && ticked_2 == true && ticked_3 == true) {
+                                    plotPoints(filt_all)
+                                } else {
+                                    if (ticked_1 == true && ticked_3 == true){
+                                        plotPoints(filt_other_renew);
+                                        console.log('ok')
+                                    } else {
+                                        if (ticked_2 == true && ticked_3 == true) {
+                                            plotPoints(filt_non_other);
+                                        } else {
+                                            if (ticked_1 == true && ticked_2 == true) {
+                                                plotPoints(filt_renew_non);
+                                            } else {
+                                                console.log('else')
+                                                if (ticked_1 == true) {
+                                                    plotPoints(filterPlantsRenewable);
+                                                }
+                                                if (ticked_2 == true) {
+                                                    plotPoints(filterPlantsNonRenewable);
+                                                    console.log("in ticked 2")
+                                                }
+                                                if (ticked_3 == true) {
+                                                    plotPoints(filterPlantsOther);
+                                                    console.log("in ticked 3")
+                                                }
+                                            }
+
+                                        }
+                                    }                                    
+                                }
+
                             });
 
                             // plotPoints(data);
