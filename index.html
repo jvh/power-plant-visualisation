@@ -34,9 +34,6 @@
     <!-- Imports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="//d3js.org/topojson.v1.min.js"></script>
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
@@ -167,10 +164,30 @@
             <div class="row">
             	<div class="col-12">
 	            	<h1>Dataset </h1>
-	            	This webpage displays the cleaning and processing of a power plant dataset such that 
+                    This webpage discusses the cleaning and subsequent visualisation of a power plant dataset which covers most of Europe, Asia, Africa, and South America. This webpage aims to graphically represent the distribution of power plants across the globe. This data is primarily intended for those who want an overview into the production of energy through power plants per country. The dataset itself is limited and incomplete, often omitting many of the quantitative data (such as the energy generation per year), for this reason it may not be suitable for professionals who want a deeper insight into the activities of individual power plants; instead, this dataset is intended for a more casual environmentally-conscience audience looking for a general insight into the production per country/continent whom would do further research with more complete datasets if interested.
 
 	            	<h1>Dataset </h1>
-	            	blh
+	            	<p>This dataset represents power plants across the globe, with a few exclusions including the entirety of North America. The dataset includes information regarding the fuel used, energy produced (in gwh), name, and location. The original dataset has a number of inconsistencies in its format which not only affect readability, but also processing. Because of this, the data had to undergo a 'cleaning' stage where these errors were addressed and fixed where possible.</p>
+                    <p>The data has been categorised into 'Renewable', 'Non-Renewable', 'and 'Other' according to the main fuel type used by the power plant (represented as 'fuel1' in the dataset). Renewable energies are those which come from renewable sources which are regularly replenished and don't require vast amounts of time. Non-renewable energy encompasses energy which originates from sources which are non-renewable, that is it exceeds the human lifetime to be replenished. Finally, we categorise 'Other' as being power plants which consume an 'other' fueltype as defined in the dataset and those power plants whose primary fuel is 'waste' -- as argued by <a href="url">https://www.renewableenergyworld.com/ugc/articles/2009/09/is-wastetoenergy-renewable.html</a>, waste fits into neither renewable or non-renewable. For this reason it seems appropriate to classify this as being 'Other' as this is entirely dependent on the type of waste being used, the method of using the waste, etc.; this is done on a plant-by-plant basis and this data is not available with the current dataset.</p>   
+
+                    We have classified the primary fuel types according to the following specification:
+
+                    Renewable
+                        Biomass
+                        Geothermal
+                        Hydro
+                        Solar
+
+                    Non-Renewable
+                        Coal
+                        Gas
+                        Oil
+                        Nuclear
+                        Wind
+
+                    Other
+                        Other
+                        Waste
 
 	            	<h1>Dataset </h1>
 	            	blh
@@ -196,11 +213,11 @@
             </div>
             
             <div id="tooltip-container"></div>
-            <div id="canvas-svg">
+            <div class="checkmarks" id="canvas-svg">
                 <form action="/action_page.php">
-                    <input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" > Renewable
-                    <input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable">Non-Renewable
-                    <input type="checkbox" name="Other" class='filter_button' id='isselected3' value="Other" >Other
+                    <input type="checkbox" name="Renewable" class='filter_button' id='isselected1' value="Renewable" checked><span class="checkmark"></span> Renewable
+                    <input type="checkbox" name="Non-Renewable" class='filter_button' id='isselected2' value="Non-Renewable" checked><span class="checkmark"></span>Non-Renewable
+                    <input type="checkbox" name="Other" class='filter_button' id='isselected3' value="Other" checked><span class="checkmark"></span>Other
                 </form>
 
 
@@ -727,7 +744,17 @@
                                 .attr("cy", function(d) {return projection([d.longitude, d.latitude])[1];})
                                 .attr("r", 1)
                                 .attr("class", "symbol")
-                                .style("fill", "red")
+                                .style("fill", function(d){
+                                    if(d.fuel1 == "Oil" || d.fuel1 == "Nuclear" || d.fuel1 == "Gas" || d.fuel1 == "Coal") {
+                                        return "red"
+                                    }
+                                    if(d.fuel1 == "Biomass" || d.fuel1 == "Geothermal" || d.fuel1 == "Hydro" || d.fuel1 == "Solar" || d.fuel1 == "Wind") {
+                                        return "green"
+                                    }
+                                    if(d.fuel1 == "Other" || d.fuel1 == "Waste" ) {
+                                        return "blue"
+                                    }
+                                })
                                 .style("opacity", 0.8)
                                 .on("mousemove", function(d) {
                                     var html = "";
@@ -738,7 +765,7 @@
                                         html += d.name + "<br>";
                                     }
                                     if(d.commissioning_year !== "" ) {
-                                     html += "Buiild In: " + d.commissioning_year + "<br>";
+                                     html += "Year Constructed: " + d.commissioning_year + "<br>";
                                     }
                                     if(d.owner !== "") {
                                         html += "Owner: " +d.owner + "<br>";
@@ -754,8 +781,9 @@
                                     if(d.fuel2 == "" && d.fuel3 !== "" ) {
                                      html += "Other Fuels: " + d.fuel3;
                                     }
-                                    
-                                    
+                                    if(d.estimated_generation_gwh !== "") {
+                                     html += "Estimated Annnual Electricity Generation (gigawatt hours): " + d.estimated_generation_gwh;
+                                    }
                                     html += "</span>";
                                     html += "</div>";
                                     
@@ -800,7 +828,9 @@
 
                                     }
                                 });
+                                
                             }
+
 
 
 
@@ -847,6 +877,7 @@
                                         return d
                                     }
                             })
+                            plotPoints(filt_all)
 
                             
                    d3.selectAll(".filter_button").on("change", function() {
@@ -868,7 +899,6 @@
                                 
 
                                 if(document.getElementById('isselected2').checked) {
-                                    console.log('34')
                                     ticked_2 = true
                                 } 
 
@@ -932,100 +962,30 @@
                                 var zoom = d3.behavior.zoom()
                                     // Limits the zooming factor
                                     .scaleExtent([1, 50])
+                                    
                                     .on("zoom",function() {
+                                        // var t = svg.attr("transform", d3.event.transform);
+                                        // svg.selectAll("circle").attr("transform", "scale(" + 1/t.k + ")");
+                                        // console.log(t)
+
                                         g.attr("transform","translate("+ 
                                             d3.event.translate.join(",")+")scale("+d3.event.scale+")");
                                         g.selectAll("path")  
                                             .attr("d", path.projection(projection)); 
+
                                 });
+                                // zoom.on("zoom", function onZoomed() {
+
+                                // })
                                 svg.call(zoom); });
-                        
-                                
 
 
                         d3.select(self.frameElement).style("height", (height * 2.3 / 3) + "px");
-                    
-                    
-                        
-                                                
-                    
-                    
+                
                     });
 
                     </script>
-                    
-
-                    <!-- <script>
-
-                        var projection = d3.geo.albersUsa()
-                            .scale(1070)
-                            .translate([width / 2, height / 2]);
-
-                        var path = d3.geo.path()
-                            .projection(projection);
-
-                        var zoom = d3.behavior.zoom()
-                            .translate(projection.translate())
-                            .scale(projection.scale())
-                            .scaleExtent([height, 8 * height])
-                            .on("zoom", zoomed);
-
-                        var svg = d3.select("#mapvis").append("svg")
-                            .attr("width", width)
-                            .attr("height", height);
-
-                        var g = svg.append("g")
-                            .call(zoom);
-
-                        g.append("rect")
-                            .attr("class", "background")
-                            .attr("width", width)
-                            .attr("height", height);
-
-                        d3.json("/mbostock/raw/4090846/us.json", function(error, us) {
-                        if (error) throw error;
-
-                        g.append("g")
-                            .attr("id", "states")
-                            .selectAll("path")
-                            .data(topojson.feature(us, us.objects.states).features)
-                            .enter().append("path")
-                            .attr("d", path)
-                            .on("click", clicked);
-
-                        g.append("path")
-                            .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                            .attr("id", "state-borders")
-                            .attr("d", path);
-                        });
-
-                        function clicked(d) {
-                        var centroid = path.centroid(d),
-                            translate = projection.translate();
-
-                        projection.translate([
-                            translate[0] - centroid[0] + width / 2,
-                            translate[1] - centroid[1] + height / 2
-                        ]);
-
-                        zoom.translate(projection.translate());
-
-                        g.selectAll("path").transition()
-                            .duration(700)
-                            .attr("d", path);
-                        }
-
-                        function zoomed() {
-                        projection.translate(d3.event.translate).scale(d3.event.scale);
-                        g.selectAll("path").attr("d", path);
-                        }
-
-                    </script> -->
-
-
-
-
-             
+                                 
             <!-- ***** Javascript End ***** -->
         </div>
     </section>

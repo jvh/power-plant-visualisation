@@ -1318,3 +1318,12 @@ p {
 .copyright-text > p {
     margin-bottom: 0;
 }
+
+
+input[type="checkbox"]:checked + label::after {
+    
+    background: red;
+    
+ }
+ 
+  
