@@ -426,11 +426,11 @@ p {
 
 
 /* --------------------------
-:: 3.0 Wellcome Area CSS 
+:: 3.0 Wellcome Area CSS
 -------------------------- */
 
 .wellcome_area {
-    background-image: url("home_img.jpg");
+    background: url('home_img.jpg');
     height: 900px;
     position: relative;
     z-index: 1;
@@ -1343,4 +1343,3 @@ p {
     width: 10px;
     border-radius: 50%;
     display: inline-block;
-  }
