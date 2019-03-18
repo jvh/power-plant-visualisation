@@ -1360,15 +1360,41 @@ p {
    
   .filterDiv {
     float: left;
-    background-color: blue;
+    background:#8460d3;
     color: #ffffff;
+    font-weight: bold;
     width: 260px;
     line-height: 150px;
     text-align: center;
     margin: 5px;
     display: none;
+    border: none;
+    outline:none;
+    border: 0;
+ box-shadow: none;
+ border-radius: 10px;
   }
    
+  .filterDiv:hover {
+    float: left;
+    background:#b29ce4;
+    color: #ffffff;
+    font-size: 11pt;
+    width: 260px;
+    line-height: 150px;
+    text-align: center;
+    margin: 5px;
+    display: none;
+    border: none;
+    outline:none;
+    border: 0;
+ box-shadow: none;
+ border-radius: 10px;
+ transition: background-color 0.5s ease;
+ transition: font-size 1s ease;
+
+  }
+.filterDiv:focus {outline:0;}
   .show {
     display: block;
   }
