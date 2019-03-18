@@ -20,7 +20,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Power Plant Visualisations</title>
+    <title>World Power Plants</title>
 
     <!-- Favicon, image found at https://www.iconfinder.com/icons/1925741/cable_charge_electric_electric_plug_electricity_icon -->
     <link rel="icon" href="img/core_img/website_icon.png">
@@ -35,6 +35,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="//d3js.org/topojson.v1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -120,8 +124,8 @@
                             <div class="collapse navbar-collapse" id="ca-navbar">
                                 <ul class="navbar-nav ml-auto" id="nav">
                                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#features">Data Preprocessing</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#screenshot">Visualisation 1</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#processingdataset">Data Preprocessing</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#visualisationmap">Visualisation</a></li>
                                     
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
@@ -143,7 +147,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12 col-md">
                     <div class="wellcome-heading">
-                        <h2>Power Plant Visualisations</h2>
+                        <h2>World Power Plants Data Visualisation</h2>
                         <p>Cleaning and Visualising Data by Jonathan Harper</p>
                     </div>
                     
@@ -168,7 +172,6 @@
 
             <div class="row">
             	<div class="col-12">
-	            	<h1>Dataset </h1>
                     This webpage discusses the cleaning and subsequent visualisation of a power plant dataset which covers most of Europe, Asia, Africa, and South America. This webpage aims to graphically represent the distribution of power plants across the globe. This data is primarily intended for those who want an overview into the production of energy through power plants per country. The dataset itself is limited and incomplete, often omitting many of the quantitative data (such as the energy generation per year), for this reason it may not be suitable for professionals who want a deeper insight into the activities of individual power plants; instead, this dataset is intended for a more casual environmentally-conscience audience looking for a general insight into the production per country/continent whom would do further research with more complete datasets if interested.
 
 	            	<h1>Dataset </h1>
@@ -199,24 +202,698 @@
                         Other
                         Waste
 
-	            	<h1>Dataset </h1>
-	            	blh
-            	</div>
+	            	<h1>Data Cleaning and Processing </h1>
+	            	<p>
+                            As previously mentioned, the data in its original form was unreadable and full of formatting issues. For this reason, an initial data-cleaning stage took place before the data could be further processed and used. Below outlines the data cleaning steps which took place, along with the original & cleaned dataset being available to download.</p>
+                
+                
+                    <h1>Visualisation Features </h1>
+                           <p>
+                                1. 2D map which has clear borders for each country.
+                                2. Zoomable using the mouse scroll wheel (or equivalent mouse zoom).
+                                3. Ability to filter points such that you can view renewable, non-reneweable, and other on the same map in any variation.
+                                4. Energy generation per plant can be represented by the radius of its circle (with large circles being attributed to more generation).
+                           </p>
+                    
+                    <h1>Tools and Technologies</h1>
+                           <p>
+                            d3, jQuery, html css, open refine
+                           </p>
+
+                    <h1>Further Extensions</h1>
+                    <p>There are a number of key improvements which could be made to this project, these are outlined below.
+
+                            1. Inclusion of a dataset which includes North America.
+                            2. More extensive dataset which allows for deeper quantative analysis.
+                            3. Improvements on the map visualisation to include a heatmap of percentage of renewable against non-renewable power plants (and generation) per country/continent.
+                            
+                            </p>
+                      <h1>Credits</h1>
+                          <p>There are a number of key improvements which could be made to this project, these are outlined below.
+        
+                                    1. Inclusion of a dataset which includes North America.
+                                    2. More extensive dataset which allows for deeper quantative analysis.
+                                    3. Improvements on the map visualisation to include a heatmap of percentage of renewable against non-renewable power plants (and generation) per country/continent.
+                                    
+                                    </p>
+                </div>
             </div>
         </div>
     </section>
 
 
+    <!-- ***** About Area ***** -->
+    <section class="special-area bg-white section_padding_100" id="processingdataset">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Section Heading Area -->
+                        <div class="section-heading text-center">
+                            <h2>Data Preprocessing</h2>
+                            <div class="line-shape"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--source: https://www.w3schools.com/howto/howto_js_portfolio_filter.asp-->
+                <div class="myBtnContainer" id="myBtnContainer">
+                        <button class="btn" onclick="selectdataprocess('all')"><b>All</b></button>
+                        <button class="btn" onclick="selectdataprocess('cleaning')"><b>Data Cleaning</b></button>
+                        <button class="btn" onclick="selectdataprocess('manip')"><b>Data Manipulation</b></button>
+                        <button class="btn" onclick="selectdataprocess('imput')"><b>Data Imputation</b></button>
+
+                      </div>
+       
+                      <div class="row">
+                          <!-- 1 -->
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal1" style="background-image: url('american-public-power-association-430854-unsplash.jpg'); background-size: 260px;">Remove Blank Rows</button>
+                        <div class="modal fade" id="myModal1" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Remove Blank Rows</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>To identify minor and obvious issues, we can make use of CSVLint (https://csvlint.io/). Our CSV contains a single warning followed by 54 errors with all errors indicating a blank row. We should remove these 54 blank rows from our CSV.</li>
+                                        <li>Use OpenRefine to load your project. When creating a project you are presented with a number of options which you can modify accordingly. In this case we will deselect the ‘Store blank rows’ option in order to remove the identified blank rows from our project.</li>
+                                        <li>Create the project. As you can see, the number of rows has been reduced by 54 indicating that the blank rows have been removed.</li>
+                                      </ol>
+                                      <br>
+                                      <img src="removing_blank_rows.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        <!-- 2 -->
+                        <button class="filterDiv all manip cleaning" data-toggle="modal" data-target="#myModal2" style="background-image: url('jackson-jost-186495-unsplash.jpg'); background-size: 260px;">Removing Blank Column</button>
+                        <div class="modal fade" id="myModal2" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Removing Blank Column</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                          <li>There are some instances in the data where it is clear that the data has been right-shifted in their columns such that the data is on the right-hand column of where it should be. </li>
+                                          <li>Using Excel we are able to identify that there exists a column with no name to the immediate right of the last named column. We are able to find this using the ‘filter’ function which allows us to set filters for individual columns (this can be found in the Home tab). We select the filter button for the blank column and remove the blank entries. This isolates only that data which has been right-shifted.</li>
+                                          <li>Examining the data, there are 2 examples we can see right-shifting in this dataset — 1) the entire row is right-shifted 1 step, and 2) where only data existing after the ‘country’ column is right-shifted 1 step. </li>
+                                          <li>We can use a further filter on the ‘country’ column to filter out blank cells. This now means we have isolated instance 2 where only the data from ‘name’ onwards has been shifted. We simply select all data for the rows, cut, and paste into the top corner of the ‘country_long’ column which has now fixed that shifting error.</li>
+                                          <li>Repeat for instance 1.</li>
+                                          <li>Remove the final blank column which no longer has any data entries under it.</li>
+                                      </ol>
+                                      <br>
+                                      <img src="removing_blank_column.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+
+                        <button class="filterDiv all manip" data-toggle="modal" data-target="#myModal3" style="background-image: url('andreas-gucklhorn-285561-unsplash.jpg'); background-size: 260px;">Left-Shifted Columns</button>
+                        <div class="modal fade" id="myModal3" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Left-Shifted Columns</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>1. Looking at the dataset, we can see that some of the IDs are in the column immediately to the left (in the ‘name’) column of their correct column (‘gppd_idnr’). 
+                                            </li>
+                                        <li>2. In OpenRefine we can see that some of the country_long’s aren’t as they should be. In the case of Australia we have some entries incorrectly entered as being the ‘name’. Looking at the gppd_idnr, we can see this is a case of left-shifting.</li>
+                                        <li>3. We can see in OpenRefine that as the entry has been left-shifted it has left an empty cell in the ‘estimated_generation_gwh’ (rightmost column).</li>
+                                        <li>4. Using Excel we can filter the estimated_generation_gwh column such that we are only viewing the blank cells.
+                                            </li>
+                                        <li>5. Once filtered, we can identify the entries which must be moved by looking at the position of the gppd_idnr entries.
+                                            </li>
+                                        <li>6. Select all entries that are left-shifted, cut and place them into the next cell over from the country_long (leaving country_long blank).
+                                            </li>
+                                        <li>7. We have now correctly aligned the left-shifted columns.
+                                            </li>
+                                        <li>Verify that the unique identifier is in the gppd_idnr to confirm that the cells have been shifted correctly.</li>
+                                      </ol>
+                                      <br>
+                                      <img src="left_shifted_columns.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        
+                        <button class="filterDiv all manip" data-toggle="modal" data-target="#myModal4" style="background-image: url('matt-palmer-1342341-unsplash.jpg'); background-size: 260px;">Right-Shifted Columns</button>
+                        <div class="modal fade" id="myModal4" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Right-Shifted Columns
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>1. Our dataset contains instances where the entries within the rows have been right-shifted due to an empty space in one of the columns. An example of this is where the data has been right-shifted by a single column such that the ‘country_long’ column is empty and the correct value is instead populated in the immediate right ‘name’ column.</li>
+                                        <li>2. Using excel, we can filter the country_long column to only display blank cells.</li>
+                                        <li>3. Select those cells which are right-shifted (this can be done by identifying those rows with the gppd_idnr entries in the wrong position.</li>
+                                        <li>4. Move them back to their appropriate positions.
+                                            </li>
+                                        <li>Verify that the unique identifier is in the gppd_idnr to confirm that the cells have been shifted correctly.</li>
+                                      </ol>
+                                      <br>
+                                      <img src="right_shifted_columns.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                              
+                        <button class="filterDiv all cleaning manip" data-toggle="modal" data-target="#myModal5"style="background-image: url('sam-bark-491978-unsplash.jpg'); background-size: 260px;">Removing Redundant Column</button>
+                        <div class="modal fade" id="myModal5" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Removing Redundant Column
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>1. Using Excel’s filter we are able to identify the values held in each column in an easily readable format (not this can also be done on OpenRefine).</li>
+                                        <li>2. We have identified that the column ‘fuel4’ contains only blank rows.</li>
+                                        <li>3. Remove fuel4 column from our dataset.
+
+                                        </li>
+                                    </ol>
+                                      <br>
+                                      <img src="removing_redundant_column.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        <button class="filterDiv all manip cleaning" data-toggle="modal" data-target="#myModal6"style="background-image: url('john-gibbons-287919-unsplash.jpg'); background-size: 260px;">Move Data in Wrong Location</button>
+                        <div class="modal fade" id="myModal6" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Move Data in Wrong Location
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>1. In some instances, data is in the wrong place and must be manually moved.</li>
+                                        <li>2. Identify data which is in the incorrect place by using OpenRefine’s text facet on each column.</li>
+                                        <li>3. Once you have identified a problem column, go to Excel and use the filter to remove blank cells within that column.</li>
+                                        <li>4. Locate the issues and fix manually.</li>
+                                    </ol>
+                                      <br>
+                                      <img src="move_manually.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal7"style="background-image: url('carl-nenzen-loven-344454-unsplash.jpg'); background-size: 260px;">Removing Redundant Rows</button>
+                        <div class="modal fade" id="myModal7" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Removing Redundant Rows</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>Some rows in the dataset only exist as information pieces regarding the data in the dataset. This could be in the form of, for example, a heading for the data underneath it.</li>
+                                        <li>2. Identify these rows using OpenRefine’s text facet.</li>
+                                        <li>3. Remove through Excel or OpenRefine.
+                                            </li>
+                                    </ol>
+                                      <br>
+                                      <img src="remove_informational_rows.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        <button class="filterDiv all cleaning"data-toggle="modal" data-target="#myModal8"style="background-image: url('nicole-harrington-743931-unsplash.jpg'); background-size: 260px;">Removing Duplicate Rows</button>
+                        <div class="modal fade" id="myModal8" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Removing Duplicate Rows</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>1. You can identify duplicate rows by putting a text facet (in OpenRefine) on a unique identifier column, in this case the ‘gppd_idnr’ column.</li>
+                                        <li>2. Once you have done that, order by count in order to find those with a count > 1.</li>
+                                        <li>3. Select each of those cases and star all but a single row (given that they are in fact duplicates).</li>
+                                        <li>4. Filter all by stars and select those rows which have been starred using this.</li>
+                                        <li>Remove all the matching rows to remove the duplicates.</li>
+                                    </ol>
+                                      <br>
+                                      <img src="remove_duplicates.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                              
+                        <button class="filterDiv all manip"data-toggle="modal" data-target="#myModal9"style="background-image: url('american-public-power-association-430868-unsplash.jpg'); background-size: 260px;">Clustering Similar Data</button>
+                        <div class="modal fade" id="myModal9" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Clustering Similar Data</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                        <li>1. Using OpenRefine we are able to automatically identify data which is similar in nature (e.g. say a minor misspelling) and could possibly be merged under a single unifying name.</li>
+                                        <li>2. Go to the column of choice -> edit cells -> cluster and edit.</li>
+                                        <li>In this case we can see that there are 2 similar values “Ebbsfleet Farm Solar Farm” and “Ebbsfleet Solar Farm”.</li>
+                                        <li>4. These can be unified under the name “Ebbsfleet Solar Farm”.</li>
+                                        <li>elect the ‘Merge’ checkbox to confirm the merge.</li>
+                                        <li>6. NOTE: In the case of “Ardoch and Over Enoch Wind Farm” there are 2 locations for the farm under the same name, 1 in Ardoch and another in Over Enoch. It’s important to not merge instances such as these as they are not the same entity and shouldn’t be under the same name. In the case of the ‘name’ column we should only cluster those which obviously don’t have a unique name/identifier.</li>
+                                    <li>7. When you have selected all cells which must be merged, select ‘Merge Selected & Re-Cluster’.</li>
+                                    <li>8. Repeat for columns which would share similar data (for example, don’t attempt to cluster the latitude column as these values are unique to that site).</li>
+                                    </ol>
+                                      <br>
+                                      <img src="clustering_similar_data.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal10"style="background-image: url('gandosh-ganbaatar-314684-unsplash.jpg'); background-size: 260px;">Remove Misspellings</button>
+                        <div class="modal fade" id="myModal10" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"></button>
+                                      <h4 class="modal-title">Remove Misspellings</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                      <ol>
+                                      <li>1. Some items are misspelt in the data and must be rectified.</li>
+                                      <li>2. We can do a cluster command in OpenRefine to easily display the spellings (and enable automatic detection for clustering purposes).</li>
+                                    <li>Identify the misspellings and change to the correct spellings.</li>  
+                                    <li>4. Merge Selected & Re-Cluster to merge those selected cells.</li>
+                                    </ol>
+                                      <br>
+                                      <img src="remove_misspellings.gif">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+                        <button class="filterDiv all cleaning imput" data-toggle="modal" data-target="#myModal11"style="background-image: url('lucas-hunter-1082284-unsplash.jpg'); background-size: 260px;">Unifying Data</button>
+                        <div class="modal fade" id="myModal11" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Unifying Data</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                  <li>Sometimes data is in the incorrect format/doesn’t follow the standards which other data has been set to. We should make the data conform to the same standards for each column.</li>
+                                <li>2. In this case, we have the instance where country_long entries have ‘UK’, ‘United Kingdom’, and ‘London’.</li>  
+                                <li>We should put these all under a unified title, in this case ‘United Kingdom’ shall be selected.</li>
+                                <li>4. Similarly, the ‘country’ column has multiple instances of GBR and UK, this should be changed to GBR to fit with the Alpha-3 formats established.</li>
+                              <li>5. ‘Commissioning_year’ column exhibits similar problems which must be rectified. Some values are stored in the form year.month, as this column stores only the years, this should be rectified.</li>  
+                            <li>6. Another example of this being in ‘country’ whereby some countries are listed by their Alpha-2 codes rather than the standard Alpha-3 codes. This is the case with ‘AUS’ and ‘AU’, therefore turn ‘AU’ instances to ‘AUS’ and also the case with ’N-KOR’ (North Korea) with ‘PRK’ being it’s ISO code.</li>  
+                            <li>7. Another case is the ‘estimated_generation_gwh’ column where some values have (gwh) prepended and appended to them, this must be edited and removed.</li>
+                          </ol>
+                                  <br>
+                                  <img src="unifying_data.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal12"style="background-image: url('kai-gradert-233001-unsplash.jpg'); background-size: 260px;">Removing Obviously Incorrect Data</button>
+                        <div class="modal fade" id="myModal12" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Removing Obviously Incorrect Data</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                    <li>1. Using the Cluster function in OpenRefine, we are able to identify and alter any obviously incorrect data.</li>
+                                    <li>Such is the case in the ‘commissioning_year’, some dates are in the future. This is likely due to either a misspelling or simply just an incorrect value being inserted.  You must use your own discretion to decide on what changes must be made</li>
+                                    <li>3. In the case of ’15123’ it’s difficult to infer a date from this so this should be made blank.</li>                                          
+                                    <li>4. In the case of ‘200’, we can reasonably assume that this is a misspelling of ‘2000’ so replace with that.</li>
+                                  </ol>
+                                  <br>
+                                  <img src="removing_incorrect.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all imput" data-toggle="modal" data-target="#myModal13"style="background-image: url('daniel-larionov-1366328-unsplash.jpg'); background-size: 260px;">Inserting Data Into Columns</button>
+                        <div class="modal fade" id="myModal13" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Inserting Data Into Columns</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                    <li>1. Once the data has been cleaned, we can begin by making adjustments to the data to make it more complete.</li>  
+                                    <li>2. The main case being exhibited in the ‘country’ and ‘country_long’ columns where many values are left blank.</li>  
+                                    <li>3. If we have one or the other, we are able to infer based on the other similar rows what the corresponding value for the blank column is.</li>  
+                                    <li>4. Apply a text facet to both country and country_long, select each country and determine if there are any blanks.</li>  
+                                    <li>5. Go to a blank cell and place the a value into it by placing the ‘edit’ button.</li>  
+                                    <li>6. Where applicable, you can infer this value using the other values already existing in the table, for example in the case of Chile, we can see that the country code ‘CHL’ is correct. In other cases (such as the case of ‘JPN’) we don’t have any other values in the table to indicate which country_long this must refer to; we instead search these values in a search engine to come to a reasonable conclusion, in this case Japan. We can further confirm these suspicions by searching the longitude/latitude and identifying which country borders they fall into.</li>  
+                                    <li>7. Once you have made the edit, press the ‘Apply to All Identical Cells’ to populate all those empty cells.</li>  
+                                    <li>8. Repeat this where the ‘country’ column hasn’t been filled but the country_long has by filtering the country column to only be those with blank cells.</li>  
+                                  </ol>
+                                  <br>
+                                  <img src="inserting_data.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all cleaning imput" data-toggle="modal" data-target="#myModal14"style="background-image: url('jim-witkowski-1417992-unsplash.jpg'); background-size: 260px;">Country Code ISO Issues</button>
+                        <div class="modal fade" id="myModal14" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Country Code ISO Issues</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                    <li>1. As the country codes are following the ISO standards, we go off the Alpha-3 codes. We use the website https://knowledgecenter.zuora.com/BB_Introducing_Z_Business/D_Country%2C_State%2C_and_Province_Codes/A_Country_Names_and_Their_ISO_Codes to find the relevant Alpha-3 and country names.</li>  
+                                  <li>In the case of Kosovo, it hasn’t got an ISO Alpha-3 code. Instead, there has been inserted the code ‘KOS’.</li>  
+                                  <li>3. As ‘KOS’ isn’t used by another country, we shall keep that as the country code.</li>
+                                  <li>4. Another issue is that we have some legacy codes, for example USSR (which no longer exists and has been replaced). In this case we must change this to the Russian Federation, RUS.</li>
+                                  </ol>
+                                  <br>
+                                  <img src="country_code_iso_issues.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal15"style="background-image: url('slide111.jpg'); background-size: 260px;">Country Long Name Issues</button>
+                        <div class="modal fade" id="myModal15" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Country Long Name Issues</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                  <li>1. Some countries listed in country_name aren’t the country names themselves, but descriptors (perhaps also including the name).</li>
+                                <li>2. For example, ‘North Vietnam’ uses the North descriptor to describe the location relative to Vietnam. However, this isn’t the country itself and should be altered to ‘Vietnam’.</li>  
+                                <li>3. Create a text facet on the country_name and locate any countries with incorrect names.</li>
+                                <li>4. Filter by that name and edit an entry, at this point click apply all.</li>
+                                </ol>
+                                  <br>
+                                  <img src="country_long_issues.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all imput cleaning" data-toggle="modal" data-target="#myModal16"style="background-image: url('slide11.jpg'); background-size: 260px;">Replacing Error Codes with Blank</button>
+                        <div class="modal fade" id="myModal16" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Replacing Error Codes with Blank</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                  <li>1. We have some errors such as #NAME, NaN, and Nil.</li>
+                                  <li>2. Given that we are unable to process this data, it’s reasonable to make these blank.</li>
+                                  <li>3. Go to a column, perform a text facet, and search for any instances of error codes.</li>
+                                  <li>4. Once you have identified an error code, select it. Once selected go to one of the error code cells and press ‘edit’. At this point replace with nothing and press apply to all.</li>
+                                <li>5. Repeat for all error codes in all cells.</li>  
+                                </ol>
+                                  <br>
+                                  <img src="erros_with_blanks.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all cleaning imput"data-toggle="modal" data-target="#myModal17"style="background-image: url('im11.jpg'); background-size: 260px;">Replacing Unusual Characters</button>
+                        <div class="modal fade" id="myModal17" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Replacing Unusual Characters</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                  <li>1. There are some unusual characters existing in place of other characters. This is likely due to some kind of encoding issue with inserting/retrieving the data.</li>
+                                  <li>2. In order to fix this, we use Excel to identify those unusual character sets (the characters will be obvious between 2 normal characters in most cases).</li>
+                                  <li>3. Once we have found an unusual character set, we can use hints to discover what character set the encoding represents. For example,  in the case of ‘Sonelgaz Production de l'Electricite’ we had the encoding set replacing ‘√¢‚Ç¨‚Ñ¢’ replacing a single apostrophe, this was more obvious than some cases given that there existed entries without the encoding issues. If you’re unable to find any fixed instances, you can either intelligently infer what the characters are depending on context, otherwise make them blank. In most cases, these are encoding issues with accented characters.</li>
+                                  <li>4. Using Excel’s find and replace functionality, we can replace the encoding character set with the correct ASCII character set.</li>
+                                  </ol>
+                                  <br>
+                                  <img src="unusual_characters.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal18"style="background-image: url('i1.jpg'); background-size: 260px;">Decimal Places</button>
+                        <div class="modal fade" id="myModal18" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Decimal Places</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                  <li>1. Some numbers in the dataset have multiple decimal places, some have none.</li>
+                                  <li>2. We should decide on a standard such that all values are similarly accurate and for readability purposes.</li>
+                                  <li>3. So, selecting all those columns which are numbers (and not expected to be whole, e.g. year) in Excel, we can then right click on the column and select ‘format cells’.</li>
+                                <li>4. Once that is done, we navigate to the Numbers tab at which point we select the number of decimal places to be 3.</li>  
+                                </ol>
+                                  <br>
+                                  <img src="decimal_places.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                        <button class="filterDiv all cleaning" data-toggle="modal" data-target="#myModal19"style="background-image: url('american-public-power-association-430863-unsplash.jpg'); background-size: 260px;">Extreme Values</button>
+                        <div class="modal fade" id="myModal19" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"></button>
+                                  <h4 class="modal-title">Extreme Values</h4>
+                                </div>
+                                <div class="modal-body" >
+                                  <ol>
+                                  <li>1. Some of the values in the columns are extremely large. This is obviously not accurate. As there is no easy way to identify where the mistake was made, I shall be removing all extremely large values.</li>
+                                <li>2. To do this we use Excel’s sort feature. Once sorted we can examine the data for any anomalies. </li>  
+                                <li>3. Once identified, remove the data.</li>
+                                </ol>
+                                  <br>
+                                  <img src="remove_extreme_values.gif">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                      </div>
+
+                    
+                
+
+            </div>
+        </section>
+
+        <!--source: https://www.w3schools.com/howto/howto_js_portfolio_filter.asp-->
+        <script>
+        selectdataprocess("all")
+        function selectdataprocess(c) {
+          var x, i;
+          x = document.getElementsByClassName("filterDiv");
+          if (c == "all") c = "";
+          for (i = 0; i < x.length; i++) {
+            w3RemoveClass(x[i], "show");
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+          }
+        }
+        function w3AddClass(element, name) {
+          var i, arr1, arr2;
+          arr1 = element.className.split(" ");
+          arr2 = name.split(" ");
+          for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+          }
+        }
+ 
+        function w3RemoveClass(element, name) {
+          var i, arr1, arr2;
+          arr1 = element.className.split(" ");
+          arr2 = name.split(" ");
+          for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+              arr1.splice(arr1.indexOf(arr2[i]), 1);    
+            }
+          }
+          element.className = arr1.join(" ");
+        }
+ 
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function(){
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+          });
+        }
+        </script>
+ 
+
     
     <!-- ***** Visualisation Map (body obtained from https://vida.io/gists/KuoWAKajdT7Q5q3Lt) ***** -->
-    <section class="special-area bg-white section_padding_100" id="about">
+    <section class="special-area bg-white section_padding_100" id="visualisationmap">
         <div class="container">
             <!-- ***** Heading ***** -->
             <div class="row"> 
                 <div class="col-12">
                     <!-- Section Heading Area -->
                     <div class="section-heading text-center">
-                        <h2>Visualisation 1</h2>
+                        <h2>Visualisation</h2>
                         <div class="line-shape"></div>
                     </div>
                 </div>
