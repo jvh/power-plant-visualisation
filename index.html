@@ -1505,7 +1505,7 @@
                                         d3.event.translate.join(",")+")scale("+d3.event.scale+")");
                                     g.selectAll("circle")
                                         .attr("d", path.projection(projection))
-                                        .attr("r", 2/zoom.scale());
+                                        .attr("r", 5/zoom.scale());
                                     g.selectAll("path")  
                                         .attr("d", path.projection(projection)); 
                                         
