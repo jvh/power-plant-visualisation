@@ -1503,9 +1503,11 @@
                                         // source: https://stackoverflow.com/questions/27460534/keep-d3-objects-size-constant-on-map-while-zoom-in-out
                                         g.attr("transform","translate("+ 
                                         d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+                                        console.log(zoom.scale)
+
+
                                     g.selectAll("circle")
                                         .attr("d", path.projection(projection))
-                                        console.log(zoom.scale)
                                         .attr("r", 5/zoom.scale());
                                     g.selectAll("path")  
                                         .attr("d", path.projection(projection)); 
