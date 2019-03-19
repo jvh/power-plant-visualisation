@@ -1489,7 +1489,7 @@
                                     
 
                                     // Limits the zooming factor
-                                    .scaleExtent([1, 50])
+                                    .scaleExtent([1, 70])
                                     .on("zoom",function() {
                                         // var t = svg.attr("transform", d3.event.transform);
                                         // svg.selectAll("circle").attr("transform", "scale(" + 1/t.k + ")");
@@ -1505,6 +1505,7 @@
                                         d3.event.translate.join(",")+")scale("+d3.event.scale+")");
                                     g.selectAll("circle")
                                         .attr("d", path.projection(projection))
+                                        console.log(zoom.scale)
                                         .attr("r", 5/zoom.scale());
                                     g.selectAll("path")  
                                         .attr("d", path.projection(projection)); 
