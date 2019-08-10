@@ -12,6 +12,8 @@ The simplest way to access the visualisation is: https://jvh.github.io/power_pla
 
 Install [python3](https://www.python.org/download/releases/3.0/).
 
+Install [D3](https://d3js.org/).
+
 ### Commands
 
 1. Start a server using command `python -m http.server 3000`. This command must be ran from the top-level repository directory.
