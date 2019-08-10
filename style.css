@@ -44,6 +44,31 @@
     padding: 0;
 }
 
+ul {
+    color: #726a84;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+ol {
+    counter-reset: my-badass-counter;   
+    color: #726a84;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+ol li{
+ list-style:none;
+ }
+
+ol li:before {
+    content: counter(my-badass-counter);
+    counter-increment: my-badass-counter;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+
 body {
     font-family: 'Cabin', sans-serif;
     background-color: #fff;
