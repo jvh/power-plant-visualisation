@@ -2,12 +2,19 @@
 
 Given some data regarding power plants, clean the data to a useable format, and visualise the data.
 
-## Instructions
+## Usage Instructions
+
+These commands should both be ran in the **top-level** directory of the repository.
 
 The simplest way to access the visualisation is: https://jvh.github.io/power_plant_visualisation/
 
-Alternatively:
-1. Start a server using a command such as `python -m http.server 3000`.
+### Prerequisites
+
+Install [python3](https://www.python.org/download/releases/3.0/).
+
+### Commands
+
+1. Start a server using command `python -m http.server 3000`. This command must be ran from the top-level repository directory.
 2. Open *index.html* in a web browser by visiting `localhost:3000`.
 
 ## Data Cleaning
