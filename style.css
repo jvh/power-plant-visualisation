@@ -436,7 +436,7 @@ p {
 -------------------------- */
 
 .wellcome_area {
-    background: url('home_img.jpg');
+    background: url('img/background_img/home_img.jpg');
     height: 900px;
     position: relative;
     z-index: 1;
